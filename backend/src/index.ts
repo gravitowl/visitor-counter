@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: '172.104.145.28:8080',
+    origin: '172.104.145.28:80',
   }),
 );
 
@@ -25,6 +25,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve('../client/index.html'));
 });
 
-app.listen(8080, () => {
-  console.log('Listening on port 8080!');
+app.listen(80, () => {
+  console.log('Listening on port 80!');
 });

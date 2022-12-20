@@ -91,7 +91,7 @@
       const wrapper = document.querySelector(".wrapper");
 
       const getCounter = async () => {
-        const res = await fetch("http://172.104.145.28:8080/counter");
+        const res = await fetch("http://172.104.145.28:80/counter");
         if (res.status == 200) {
           const json = await res.json();
           counter.innerText = json.res;

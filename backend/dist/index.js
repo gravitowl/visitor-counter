@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: '172.104.145.28:8080',
+    origin: '172.104.145.28:80',
 }));
 let counter = 0;
 if (fs_1.default.existsSync('./counter.txt')) {
@@ -23,6 +23,6 @@ app.get('/counter', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path_1.default.resolve('../client/index.html'));
 });
-app.listen(8080, () => {
-    console.log('Listening on port 8080!');
+app.listen(80, () => {
+    console.log('Listening on port 80!');
 });
