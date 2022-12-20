@@ -4,12 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/6198ce0878.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Visitor Counter</title>
   </head>
   <body>
     <div class="wrapper">
       <span class="title">Je bent bezoeker nummer</span>
       <span id="counter"></span>
+      <div class="links">
+        <a href="https://twitter.com/Achtergesteld">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://discord.gg/srphFgWFtt">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://github.com/gravitowl">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
     </div>
 
     <style>
@@ -37,7 +52,7 @@
         justify-content: center;
         font-family: "Poppins", sans-serif;
         opacity: 0;
-        transition: 1s ease;
+        transition: opacity 1s ease;
       }
 
       .title {
@@ -57,6 +72,17 @@
 
         color: transparent;
         background-clip: text;
+      }
+
+      .links {
+        font-size: 32px;
+        display: flex;
+        gap: 32px;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
       }
     </style>
 
