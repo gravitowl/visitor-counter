@@ -13,7 +13,8 @@
   <body>
     <div class="wrapper">
       <span class="title">Je bent bezoeker nummer</span>
-      <span id="counter"></span>
+      <span id="counter">0</span>
+      <span class="disclaimer">(inclusief bots)</span>
       <div class="links">
         <a href="https://twitter.com/Achtergesteld">
           <i class="fab fa-twitter"></i>
@@ -53,11 +54,11 @@
         font-family: "Poppins", sans-serif;
         opacity: 0;
         transition: opacity 1s ease;
+        color: white;
       }
 
       .title {
         font-size: min(5vh, 5vw);
-        color: white;
       }
 
       #counter {
