@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: '172.104.145.28:80',
+    origin: 'http://172.104.145.28',
   }),
 );
 
