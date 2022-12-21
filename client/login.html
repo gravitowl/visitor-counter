@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span class="title">Login</span>
+      <input type="text" placeholder="code" id="code" maxlength="6" />
+      <button id="login">Login</button>
+      <span id="error">Wrong code.</span>
+    </div>
+
+    <script>
+      const loginButton = document.getElementById("login");
+      const codeInput = document.getElementById("code");
+      const error = document.getElementById("error");
+
+      loginButton.addEventListener("click", async () => {
+        const res = await fetch("http://mentaalachtergesteld.nl/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            code: codeInput.value,
+          }),
+        });
+        if (res.status == 200) {
+          localStorage.setItem("code", codeInput.value);
+          window.location.href = "/admin";
+        } else {
+          error.style.visibility = "visible";
+        }
+      });
+    </script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(
+          109.6deg,
+          rgba(119, 44, 232, 0.68) 11.5%,
+          rgb(119, 44, 232) 91.2%
+        );
+        background-size: 200%;
+        user-select: none;
+      }
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        gap: 8px;
+        color: white;
+      }
+
+      .title {
+        font-size: min(5vh, 5vw);
+      }
+
+      #code {
+        height: 2rem;
+        width: 5rem;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      #login {
+        width: 5rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        background: linear-gradient(
+          to right,
+          rgb(242, 112, 156),
+          rgb(255, 148, 114)
+        );
+        background-position: left;
+        background-size: 400%;
+        color: white;
+        box-shadow: 0px 5px 10px 2px rgb(0, 0, 0, 0.25);
+        transition: background-position 0.5s ease;
+      }
+
+      #login:hover {
+        background-position: right;
+      }
+
+      #error {
+        color: #f25f5c;
+        visibility: hidden;
+      }
+    </style>
+  </body>
+</html>

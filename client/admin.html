@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span class="title">Set Counter</span>
+      <input type="text" min="0" value="0" id="newCounter" />
+      <button id="setCounter">Set Counter</button>
+      <button id="logout">Logout</button>
+      <span id="error">Something went wrong...</span>
+      <span id="succes">Set Counter!</span>
+    </div>
+
+    <script>
+      const setCounterButton = document.getElementById("setCounter");
+      const newCounter = document.getElementById("newCounter");
+      const logout = document.getElementById("logout");
+      const succes = document.getElementById("succes");
+      const error = document.getElementById("error");
+
+      setCounterButton.addEventListener("click", async () => {
+        succes.style.display = "none";
+        error.style.display = "none";
+        const res = await fetch("http://localhost:80/set-counter", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            code: localStorage.getItem("code"),
+            newCounter: newCounter.value,
+          }),
+        });
+        if (res.status == 200) {
+          succes.style.display = "block";
+        } else if (res.status == 401) {
+          window.location.href = "/";
+        } else {
+          error.style.display = "block";
+        }
+      });
+
+      logout.addEventListener("click", () => {
+        localStorage.removeItem("code");
+        window.location.href = "/";
+      });
+
+      if (localStorage.getItem("code") == undefined) {
+        window.location.href = "/login";
+      }
+    </script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(
+          109.6deg,
+          rgba(119, 44, 232, 0.68) 11.5%,
+          rgb(119, 44, 232) 91.2%
+        );
+        background-size: 200%;
+        user-select: none;
+      }
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        gap: 8px;
+        color: white;
+      }
+
+      .title {
+        font-size: min(5vh, 5vw);
+      }
+
+      #newCounter {
+        height: 2rem;
+        width: 7rem;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      #setCounter,
+      #logout {
+        width: 7rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        background: linear-gradient(
+          to right,
+          rgb(242, 112, 156),
+          rgb(255, 148, 114)
+        );
+        background-position: left;
+        background-size: 400%;
+        color: white;
+        box-shadow: 0px 5px 10px 2px rgb(0, 0, 0, 0.25);
+        transition: background-position 0.5s ease;
+      }
+
+      #setCounter:hover,
+      #logout:hover {
+        background-position: right;
+      }
+
+      #error {
+        color: #f25f5c;
+        display: none;
+      }
+
+      #succes {
+        color: #0cce6b;
+        display: none;
+      }
+    </style>
+  </body>
+</html>
