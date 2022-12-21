@@ -7,16 +7,16 @@ const express_1 = __importDefault(require("express"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
-const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+// import rateLimit from 'express-rate-limit';
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const limiter = (0, express_rate_limit_1.default)({
-    windowMs: 24 * 60 * 60 * 1000,
-    max: 1,
-    standardHeaders: true,
-    legacyHeaders: false,
-});
+// const limiter = rateLimit({
+//   windowMs: 24 * 60 * 60 * 1000,
+//   max: 1,
+//   standardHeaders: true,
+//   legacyHeaders: false,
+// });
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
     origin: 'https://172.104.145.28:80',
@@ -25,7 +25,7 @@ let counter = 0;
 if (fs_1.default.existsSync('./counter.txt')) {
     counter = parseInt(fs_1.default.readFileSync('./counter.txt', 'utf-8'));
 }
-app.get('/increment-counter', limiter, (req, res) => {
+app.get('/increment-counter', (req, res) => {
     counter++;
     fs_1.default.writeFileSync('./counter.txt', String(counter));
     return res.sendStatus(200);
