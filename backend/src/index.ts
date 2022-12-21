@@ -29,7 +29,7 @@ if (fs.existsSync('./counter.txt')) {
 app.get('/increment-counter', limiter, (req, res) => {
   counter++;
   fs.writeFileSync('./counter.txt', String(counter));
-  return res.status(200);
+  return res.sendStatus(200);
 });
 
 app.get('/get-counter', (req, res) => {
