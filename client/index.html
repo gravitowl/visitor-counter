@@ -93,8 +93,8 @@
       const wrapper = document.querySelector(".wrapper");
 
       const getCounter = async () => {
-        await fetch("http://mentaalachtergesteld.nl/increment-counter");
-        const res = await fetch("http://mentaalachtergesteld.nl/get-counter");
+        await fetch("https://mentaalachtergesteld.nl/increment-counter");
+        const res = await fetch("https://mentaalachtergesteld.nl/get-counter");
         if (res.status == 200) {
           const json = await res.json();
           counter.innerText = json.res;
