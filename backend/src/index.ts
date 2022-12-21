@@ -12,7 +12,6 @@ const limiter = rateLimit({
   max: 1,
   standardHeaders: true,
   legacyHeaders: false,
-  message: 'Can only increase counter once per day.',
 });
 
 app.use(express.json());

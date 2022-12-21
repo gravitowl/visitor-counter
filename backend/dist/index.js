@@ -28,7 +28,7 @@ if (fs_1.default.existsSync('./counter.txt')) {
 app.get('/increment-counter', limiter, (req, res) => {
     counter++;
     fs_1.default.writeFileSync('./counter.txt', String(counter));
-    return res.status(200);
+    return res.sendStatus(200);
 });
 app.get('/get-counter', (req, res) => {
     return res.status(200).json({ res: counter });
