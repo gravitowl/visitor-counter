@@ -2,17 +2,17 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
-import rateLimit from 'express-rate-limit';
+// import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 24 * 60 * 60 * 1000,
-  max: 1,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+// const limiter = rateLimit({
+//   windowMs: 24 * 60 * 60 * 1000,
+//   max: 1,
+//   standardHeaders: true,
+//   legacyHeaders: false,
+// });
 
 app.use(express.json());
 app.use(
@@ -25,7 +25,7 @@ if (fs.existsSync('./counter.txt')) {
   counter = parseInt(fs.readFileSync('./counter.txt', 'utf-8'));
 }
 
-app.get('/increment-counter', limiter, (req, res) => {
+app.get('/increment-counter', (req, res) => {
   counter++;
   fs.writeFileSync('./counter.txt', String(counter));
   return res.sendStatus(200);
