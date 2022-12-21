@@ -26,7 +26,7 @@
       setCounterButton.addEventListener("click", async () => {
         succes.style.display = "none";
         error.style.display = "none";
-        const res = await fetch("http://localhost:80/set-counter", {
+        const res = await fetch("https://mentaalachtergesteld.nl/set-counter", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
